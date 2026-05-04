@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AI-Cam Pro</title>
+    <style>
+        body { margin: 0; background: #000; color: white; font-family: sans-serif; overflow: hidden; }
+        #camera-container { position: relative; width: 100vw; height: 100vh; display: flex; flex-direction: column; }
+        
+        video { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Controles Estilo GCAM */
+        .controls { position: absolute; bottom: 30px; width: 100%; display: flex; justify-content: space-around; align-items: center; }
+        .shutter { width: 70px; height: 70px; border-radius: 50%; border: 5px solid white; background: transparent; cursor: pointer; }
+        .shutter:active { background: white; }
+        .shutter.astro-mode { border-color: #8800ff; }
+
+        .settings-bar { position: absolute; top: 10px; width: 100%; display: flex; justify-content: center; gap: 15px; background: rgba(0,0,0,0.5); padding: 10px 0; }
+        .mode-selector { position: absolute; bottom: 120px; width: 100%; display: flex; justify-content: center; gap: 20px; font-weight: bold; text-transform: uppercase; font-size: 12px; }
+        .active-mode { color: #4285f4; }
+    </style>
+</head>
+<body>
+
+<div id="camera-container">
+    <video id="preview" autoplay playsinline></video>
+    <canvas id="capture-canvas" style="display:none;"></canvas>
+
+    <div class="settings-bar">
+        <span id="iso-display">ISO: Auto</span>
+        <span id="exp-display">EXP: 1/50</span>
+    </div>
+
+    <div class="mode-selector">
+        <span onclick="setMode('photo')" id="m-photo" class="active-mode">Foto</span>
+        <span onclick="setMode('astro')" id="m-astro">Astro</span>
+        <span onclick="setMode('timelapse')" id="m-lapse">Timelapse</span>
+    </div>
+
+    <div class="controls">
+        <div style="width: 50px;"></div> <button class="shutter" id="shutter-btn"></button>
+        <div id="timer-display" style="width: 50px; font-variant-numeric: tabular-nums;"></div>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
